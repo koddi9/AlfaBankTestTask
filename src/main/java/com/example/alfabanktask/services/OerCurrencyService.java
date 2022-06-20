@@ -1,4 +1,4 @@
-package com.example.alfabanktask.service;
+package com.example.alfabanktask.services;
 
 import com.example.alfabanktask.dto.CurrencyApiClient;
 import com.example.alfabanktask.dto.CurrencyApiResponse;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 @Service
-public class CurrencyService {
+public class OerCurrencyService implements CurrencyService {
 
     @Autowired
     CurrencyApiClient client;
@@ -20,17 +20,17 @@ public class CurrencyService {
     @Value("${api.currency.app_id}")
     private String appId;
 
-    public double getLatestCurrencyRate(String target) {
-        CurrencyApiResponse currencyApiResponse = client.getLatestCurrencyRate(appId, base, target).getBody();
+    private double getLatestCurrencyRate(String target) {
+        CurrencyApiResponse currencyApiResponse = client.getLatestCurrencyRate(appId, base, target);
         Map<String, Double> rates = currencyApiResponse.getRates();
 
         return rates.get(target);
     }
 
-    public double getPastCurrencyRate(String target) {
+    private double getPastCurrencyRate(String target) {
         String date = LocalDate.now().minusDays(1).toString();
 
-        CurrencyApiResponse currencyApiResponse = client.getPastCurrencyRate(date, appId, base, target).getBody();
+        CurrencyApiResponse currencyApiResponse = client.getPastCurrencyRate(date, appId, base, target);
         Map<String, Double> rates = currencyApiResponse.getRates();
 
         return rates.get(target);
