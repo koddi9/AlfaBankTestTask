@@ -1,14 +1,15 @@
 package com.example.alfabanktask.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 
-import java.util.HashMap;
+import java.util.Map;
 
 @Data
+@AllArgsConstructor
 public class CurrencyApiResponse {
 
     private String base;
-    private HashMap<String,Double> rates;
+    private Map<String, Double> rates;
 
 }
