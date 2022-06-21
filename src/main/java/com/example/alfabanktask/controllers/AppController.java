@@ -21,7 +21,7 @@ public class AppController {
     AppService appService;
 
     @GetMapping
-    public String getGif(@RequestParam(defaultValue = "RUB", required = false) String target, Model model) {
+    public String getGif(@RequestParam(defaultValue = "${api.currency.target.default}", required = false) String target, Model model) {
 
         Map<String, Double> currencyRates = oerCurrencyService.getCurrencyRates(target);
         model.addAllAttributes(currencyRates);
